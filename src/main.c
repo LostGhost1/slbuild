@@ -49,7 +49,7 @@ int parse(char *buildfname, char *targetname, struct target **return_targets, in
 	        ntargets+=1;
 	        targets=realloc(targets,ntargets*sizeof(struct target));
 		struct target *current_target=&targets[ntargets-1];
-		memset(current_target,0,sizeof(current_target));
+		memset(current_target,0,sizeof(*current_target));
 	        last_token[strlen(last_token)-1]='\0';
 	        current_target->name=strdup(last_token);
 	        while(1){
