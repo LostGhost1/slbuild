@@ -69,6 +69,7 @@ int parse(char *buildfname, char *targetname, struct target **return_targets, in
 				continue;
 			}
 			current_target->ndeps+=1;
+			current_target->deps=NULL;
 			current_target->deps=realloc(current_target->deps,(current_target->ndeps)*sizeof(char*));
 			current_target->deps[current_target->ndeps-1]=strdup(last_token);
 		}
