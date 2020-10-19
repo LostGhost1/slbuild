@@ -1,7 +1,7 @@
 build: slbuild
 	echo "Building..."
 slbuild: src/
-	cp src2/slbuild .
+	cp src/slbuild .
 clean: src/
 	rm slbuild
 install: slbuild
