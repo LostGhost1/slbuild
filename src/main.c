@@ -1,4 +1,5 @@
 #include "main.h"
+#include "debug.c"
 char *argv1;
 int resolve(char *targetname, char *parentname, struct target *targets, int ntargets){
 	char s[128];
@@ -81,14 +82,14 @@ int parse(char *buildfname, char *targetname, struct target **targets_return, in
 				chdir(last_token);
 				char t[512];
 				getcwd(t,512*sizeof(char));
-				strcat(t,"/Buildfile");
 				current_target->ndeps+=1;
 				current_target->deps=realloc(current_target->deps,(current_target->ndeps)*sizeof(char*));
 				current_target->deps[current_target->ndeps-1]=malloc(1024);
 				current_target->deps[current_target->ndeps-1][0]='\0';
-				strcat(current_target->deps[current_target->ndeps-1],cwd);
-				strcat(current_target->deps[current_target->ndeps-1],last_token);
+				strcat(t,"/");
+				strcat(current_target->deps[current_target->ndeps-1],t);
 				strcat(current_target->deps[current_target->ndeps-1],targetname);
+				strcat(t,"Buildfile");
 				parse(t,targetname,&targets,&ntargets);
 				current_target=&targets[current_target_n];
 				chdir(cwd);
@@ -129,7 +130,6 @@ int main(int argc, char **argv){
 	strcat(cwd,"/");
 	strcat(s,cwd);
 	strcat(s,argv[1]);
-//	printtargets(targets,ntargets);
 	resolve(s,NULL,targets,ntargets);
 	printf("Target %s reached successfully.\n",argv[1]); 
 	return 0;
