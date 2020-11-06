@@ -1,8 +1,9 @@
 build: slbuild
 #Things here will always execute
+install: slbuild
 slbuild: main.o
-	cc -o slbuild main.o
+	cc -g -o slbuild main.o
 main.o: main.c
-	cc -c main.c
+	cc -g -c main.c
 clean:
 	rm slbuild main.o

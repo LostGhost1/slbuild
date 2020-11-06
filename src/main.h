@@ -6,13 +6,14 @@
 #include <sys/stat.h>
 #include <unistd.h>
 struct target{
+	char *location;
 	char *name;
 	char **deps;
 	int ndeps;
 	char **commands;
 	int ncommands;
 };
-int parse(char *buildfname, char *targetarg, struct target **return_targets, int *return_ntargets);
+int parse(char *buildfname, char *targetname, struct target **targets_return, int *ntargets_return);
 /*
 void dirpush(char *dirname);
 char *dirpeek();

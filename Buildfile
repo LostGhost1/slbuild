@@ -5,4 +5,4 @@ slbuild: src/
 clean: src/
 	rm slbuild
 install: slbuild
-	cp src2/slbuild /usr/local/bin/
+	cp src/slbuild /usr/local/bin/
