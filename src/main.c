@@ -19,20 +19,21 @@ int resolve(char *targetname, char *parentname, struct target *targets, int ntar
 			if(!stat(targetname,&statstarget)){
 					if(difftime(statsdep.st_mtime,statstarget.st_mtime)>0){
 						needsupdate=1;
+						result=1;
 						break;
 					}
 			}
 		};
 	}
 	for(int j=0;j<targets[i].ndeps;j++)
-		if(resolve(targets[i].deps[j],targetname,targets,ntargets)){needsupdate=1;}
+		if(resolve(targets[i].deps[j],targetname,targets,ntargets)){needsupdate=1;result=1;}
 	if(needsupdate)
 	for(int j=0;j<targets[i].ncommands;j++){
 		printf("%s",targets[i].commands[j]);
 		chdir(targets[i].location);
 		system(targets[i].commands[j]);
 	}
-	return (needsupdate);
+	return (result);
 }
 int parse(char *buildfname, char *targetname, struct target **targets_return, int *ntargets_return){
 	FILE *f=fopen(buildfname,"r");
